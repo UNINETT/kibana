@@ -5,9 +5,12 @@ var _ = require('lodash');
 var fs = require('fs');
 var util = require('util');
 var url = require('url');
-var uri = url.parse(config.elasticsearch);
+var uri = _.pick(url.parse(config.elasticsearch, false, true), ['protocol', 'hostname', 'pathname', 'port', 'auth', 'query']);
 if (config.kibana.kibana_elasticsearch_username && config.kibana.kibana_elasticsearch_password) {
   uri.auth = util.format('%s:%s', config.kibana.kibana_elasticsearch_username, config.kibana.kibana_elasticsearch_password);
+}
+if (config.kibana.kibana_oauth_token) {
+  uri.headers = { Authorization: 'Bearer ' + config.kibana.kibana_oauth_token };
 }
 
 var ssl = { rejectUnauthorized: config.kibana.verify_ssl };
@@ -22,7 +25,7 @@ if (config.kibana.ca) {
 }
 
 module.exports = new elasticsearch.Client({
-  host: url.format(uri),
+  host: uri,
   ssl: ssl,
   pingTimeout: config.ping_timeout,
   log: function (config) {

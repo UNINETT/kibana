@@ -27,7 +27,7 @@ function createPackages(grunt) {
       var commands = [];
       var arch = /x64$/.test(name) ? 'x86_64' : 'i686';
 
-      var fpm_options = [ 'fpm', '-f', '-p', target, '-s', 'dir', '-n', 'kibana', '-v', version,
+      var fpm_options = [ 'fpm', '-f', '-p', target, '-s', 'dir', '-n', 'unikibana41', '-v', version,
                           '--after-install', join(distPath, 'user', 'installer.sh'),
                           '--after-remove', join(distPath, 'user', 'remover.sh'),
                           '--config-files', '/opt/kibana/config/kibana.yml' ];

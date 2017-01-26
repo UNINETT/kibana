@@ -9,7 +9,7 @@ export default function setHeaders(originalHeaders, newHeaders) {
   }
 
   return {
-    ...originalHeaders,
-    ...newHeaders
+    ...newHeaders,
+    ...originalHeaders
   };
 }

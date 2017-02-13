@@ -5,7 +5,8 @@ module.exports = function (kibana) {
       return Joi.object({
         enabled: Joi.boolean().default(true),
         defaultAppId: Joi.string().default('discover'),
-        index: Joi.string().default('.kibana')
+        index: Joi.string().default('.kibana'),
+        laasShortenApiEndpoint: Joi.string().default('http://localhost:5601/shorten')
       }).default();
     },
 
@@ -39,7 +40,8 @@ module.exports = function (kibana) {
 
           return {
             kbnDefaultAppId: config.get('kibana.defaultAppId'),
-            tilemap: config.get('tilemap')
+            tilemap: config.get('tilemap'),
+            laasShortenApiEndpoint: config.get('kibana.laasShortenApiEndpoint')
           };
         }
       },

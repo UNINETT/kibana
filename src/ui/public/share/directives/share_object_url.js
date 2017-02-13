@@ -6,7 +6,7 @@ const getUnhashableStatesProvider = require('ui/state_management/state_hashing')
 require('../styles/index.less');
 
 app.directive('shareObjectUrl', function (Private, Notifier) {
-  const urlShortener = Private(require('../lib/url_shortener'));
+  const laasURLShortener = Private(require('../lib/laas_url_shortener'));
   const getUnhashableStates = Private(getUnhashableStatesProvider);
 
   return {
@@ -20,6 +20,10 @@ app.directive('shareObjectUrl', function (Private, Notifier) {
         location: `Share ${$scope.$parent.objectType}`
       });
 
+      $scope.allowShort = false;
+      if ($scope.$parent.objectType === 'dashboard') {
+        $scope.allowShort = true;
+      }
       $scope.textbox = $el.find('input.url')[0];
       $scope.clipboardButton = $el.find('button.clipboard-button')[0];
 
@@ -62,7 +66,7 @@ app.directive('shareObjectUrl', function (Private, Notifier) {
       $scope.generateShortUrl = function () {
         if ($scope.shortGenerated) return;
 
-        urlShortener.shortenUrl($scope.url)
+        laasURLShortener.shortenUrl($scope.url)
         .then(shortUrl => {
           updateUrl(shortUrl);
           $scope.shortGenerated = true;

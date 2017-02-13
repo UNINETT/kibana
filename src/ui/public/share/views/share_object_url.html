@@ -6,6 +6,7 @@
     class="form-control url">
   </input>
   <button
+    ng-if="allowShort"
     class="shorten-button"
     tooltip="Generate Short URL"
     ng-click="generateShortUrl()"

@@ -95,16 +95,6 @@
           <i aria-hidden="true" class="fa fa-folder-open-o"></i>
         </button>
       </kbn-tooltip>
-      <kbn-tooltip text="Share Visualization" placement="bottom" append-to-body="1">
-        <button
-          ng-class="{active: configTemplate.is('share')}"
-          ng-click="configTemplate.toggle('share')"
-          aria-haspopup="true"
-          aria-expanded="{{ configTemplate.is('share') }}"
-          aria-label="Share Visualization">
-          <i aria-hidden="true" class="fa fa-external-link"></i>
-        </button>
-      </kbn-tooltip>
       <kbn-tooltip text="Refresh" placement="bottom" append-to-body="1">
         <button
           ng-click="fetch()"

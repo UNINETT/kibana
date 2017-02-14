@@ -6,9 +6,9 @@ export default function createUrlShortener(Notifier, $http, $location) {
     location: 'Url Shortener'
   });
 
-  function shortenUrl(absoluteUrl) {
+  function shortenUrl(absoluteUrl, kbnID) {
     const apiEndpoint = chrome.getInjected('laasShortenApiEndpoint');
-    return $http.post(`${apiEndpoint}`, {url: absoluteUrl}).then((result) => {
+    return $http.post(`${apiEndpoint}`, {url: absoluteUrl, id: kbnID}).then((result) => {
       return url.format(`${result.data.url}`);
     }).catch((response) => {
       notify.error(response);

@@ -66,7 +66,7 @@ app.directive('shareObjectUrl', function (Private, Notifier) {
       $scope.generateShortUrl = function () {
         if ($scope.shortGenerated) return;
 
-        laasURLShortener.shortenUrl($scope.url)
+        laasURLShortener.shortenUrl($scope.url, $scope.$parent.objectId)
         .then(shortUrl => {
           updateUrl(shortUrl);
           $scope.shortGenerated = true;
